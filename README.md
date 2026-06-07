@@ -17,7 +17,7 @@ Aplikace slouží jako jednoduchý CRM systém pro evidenci smluv a osob, které
 
 ---
 
-## Stručná technická dokumentace
+## Technická dokumentace
 
 Aplikace je postavena na moderních technologiích od Microsoftu a dodržuje architekturu MVC (Model-View-Controller).
 
