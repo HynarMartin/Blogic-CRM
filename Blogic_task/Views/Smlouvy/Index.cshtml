@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Blogic_task.Models.Smlouva>
+
+<h1>Seznam smluv</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Zpět na Dashboard</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Evidenční číslo</th>
+            <th>Instituce</th>
+            <th>Zákazník</th>
+            <th>Správce</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EvidencniCislo</td>
+                <td>@item.Instituce</td>
+                <td>
+                    <a asp-controller="Klienti" asp-action="Details" asp-route-id="@item.KlientId">
+                        @item.Klient.Jmeno @item.Klient.Prijmeni
+                    </a>
+                </td>
+                <td>
+                    <a asp-controller="Poradci" asp-action="Details" asp-route-id="@item.SpravceId">
+                        @item.Spravce.Prijmeni
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.EvidencniCislo" class="btn btn-primary">Detail smlouvy</a>
+                    <a asp-action="Edit" asp-route-id="@item.EvidencniCislo" class="btn btn-warning btn-sm">Upravit</a>
+                    <a asp-action="Delete" asp-route-id="@item.EvidencniCislo" class="btn btn-danger btn-sm">Smazat</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

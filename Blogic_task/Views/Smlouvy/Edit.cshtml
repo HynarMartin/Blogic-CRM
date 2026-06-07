@@ -1,0 +1,53 @@
+﻿@model Blogic_task.Models.Smlouva
+
+<h1>Upravit smlouvu</h1>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="EvidencniCislo" />
+
+            <div class="form-group mb-3">
+                <label class="control-label">Evidenční číslo</label>
+                <input class="form-control" value="@Model.EvidencniCislo" disabled />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Instituce" class="control-label">Instituce</label>
+                <select asp-for="Instituce" class="form-control" asp-items="Html.GetEnumSelectList<Blogic_task.Models.Instituce>()"></select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="KlientId" class="control-label">Zákazník (Příjmení)</label>
+                <select asp-for="KlientId" class="form-control" asp-items="ViewBag.KlientId"></select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="SpravceId" class="control-label">Správce smlouvy (Příjmení)</label>
+                <select asp-for="SpravceId" class="form-control" asp-items="ViewBag.SpravceId"></select>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4 mb-3">
+                    <label asp-for="DatumUzavreni" class="control-label">Datum uzavření</label>
+                    <input asp-for="DatumUzavreni" class="form-control" type="date" />
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label asp-for="DatumPlatnosti" class="control-label">Platnost od</label>
+                    <input asp-for="DatumPlatnosti" class="form-control" type="date" />
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label asp-for="DatumUkonceni" class="control-label">Ukončeno</label>
+                    <input asp-for="DatumUkonceni" class="form-control" type="date" />
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Uložit změny" class="btn btn-warning" />
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Zpět na Dashboard</a>
+            </div>
+        </form>
+    </div>
+</div>

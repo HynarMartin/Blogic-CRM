@@ -1,0 +1,38 @@
+﻿@model Blogic_task.Models.Klient
+
+<h1>Detail zákazníka: @Model.Jmeno @Model.Prijmeni</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+        <dt class="col-sm-2">Telefon</dt>
+        <dd class="col-sm-10">@Model.Telefon</dd>
+    </dl>
+</div>
+
+<h3>Smlouvy tohoto zákazníka</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Evidenční číslo</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var smlouva in Model.Smlouvy)
+        {
+            <tr>
+                <td>@smlouva.EvidencniCislo</td>
+                <td>
+                    <a asp-controller="Smlouvy" asp-action="Details" asp-route-id="@smlouva.EvidencniCislo" class="btn btn-sm btn-info">
+                        Otevřít smlouvu
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Zpět na Dashboard</a>

@@ -1,0 +1,25 @@
+﻿@model Blogic_task.Models.Smlouva
+
+<h1>Smazat smlouvu</h1>
+
+<h3 class="text-danger">Opravdu chcete smazat tuto smlouvu?</h3>
+<div>
+    <h4>Smlouva č. @Model.EvidencniCislo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Instituce</dt>
+        <dd class="col-sm-10">@Model.Instituce</dd>
+
+        <dt class="col-sm-2">Zákazník</dt>
+        <dd class="col-sm-10">@Model.Klient.Jmeno @Model.Klient.Prijmeni</dd>
+
+        <dt class="col-sm-2">Správce</dt>
+        <dd class="col-sm-10">@Model.Spravce.Jmeno @Model.Spravce.Prijmeni</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EvidencniCislo" />
+        <input type="submit" value="Smazat navždy" class="btn btn-danger" />
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Zpět na Dashboard</a>
+    </form>
+</div>

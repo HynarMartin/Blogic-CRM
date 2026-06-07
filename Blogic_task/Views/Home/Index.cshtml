@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Blogic_task.Models.Smlouva>
+@{
+    ViewData["Title"] = "Domovská stránka";
+}
+
+<div class="row mt-4">
+
+    <div class="col-md-8">
+        <div class="card shadow-sm border-dark mb-4">
+
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0 text-uppercase" style="letter-spacing: 2px;">Seznam smluv</h4>
+
+                <form asp-controller="Home" asp-action="Index" method="get" class="d-flex mx-3" style="flex-grow: 1; max-width: 400px;">
+                    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control form-control-sm me-2" placeholder="Hledat číslo smlouvy nebo příjmení..." />
+                    <button type="submit" class="btn btn-outline-light btn-sm me-2">Hledat</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-sm text-white">X</a>
+                </form>
+
+                <a asp-controller="Smlouvy" asp-action="Create" class="btn btn-success btn-sm text-nowrap">
+                    + Vytvořit novou
+                </a>
+            </div>
+
+            <div class="card-body p-0" style="min-height: 60vh;">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Evidenční číslo</th>
+                                <th>Instituce</th>
+                                <th>Zákazník</th>
+                                <th>Správce</th>
+                                <th>Akce</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-controller="Smlouvy" asp-action="Details" asp-route-id="@item.EvidencniCislo" class="fw-bold text-decoration-none">
+                                            @item.EvidencniCislo
+                                        </a>
+                                    </td>
+                                    <td>@item.Instituce</td>
+                                    <td>@item.Klient.Jmeno @item.Klient.Prijmeni</td>
+                                    <td>@item.Spravce.Prijmeni</td>
+                                    <td>
+                                        <a asp-controller="Smlouvy" asp-action="Edit" asp-route-id="@item.EvidencniCislo" class="btn btn-warning btn-sm">Upravit</a>
+                                        <a asp-controller="Smlouvy" asp-action="Delete" asp-route-id="@item.EvidencniCislo" class="btn btn-danger btn-sm">Smazat</a>
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border-dark mb-4">
+            <div class="card-header bg-dark text-white text-center">
+                <h4 class="mb-0 text-uppercase" style="letter-spacing: 2px;">Klienti</h4>
+            </div>
+            <div class="card-body text-center p-4">
+                <div class="d-grid gap-3">
+                    <a asp-controller="Klienti" asp-action="Index" class="btn btn-outline-primary btn-lg">Zobrazit</a>
+                    <a asp-controller="Klienti" asp-action="Create" class="btn btn-outline-success btn-lg">Vytvořit</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-dark">
+            <div class="card-header bg-dark text-white text-center">
+                <h4 class="mb-0 text-uppercase" style="letter-spacing: 2px;">Poradci</h4>
+            </div>
+            <div class="card-body text-center p-4">
+                <div class="d-grid gap-3">
+                    <a asp-controller="Poradci" asp-action="Index" class="btn btn-outline-primary btn-lg">Zobrazit</a>
+                    <a asp-controller="Poradci" asp-action="Create" class="btn btn-outline-success btn-lg">Vytvořit</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-dark mt-4">
+            <div class="card-header bg-dark text-white text-center">
+                <h4 class="mb-0 text-uppercase" style="letter-spacing: 2px;">Export do CSV</h4>
+            </div>
+            <div class="card-body text-center p-4">
+                <div class="d-grid gap-3">
+                    <a asp-controller="Smlouvy" asp-action="ExportToCsv" class="btn btn-outline-dark fw-bold">
+                        ↓ Smlouvy
+                    </a>
+                    <a asp-controller="Klienti" asp-action="ExportToCsv" class="btn btn-outline-dark fw-bold">
+                        ↓ Zákazníci
+                    </a>
+                    <a asp-controller="Poradci" asp-action="ExportToCsv" class="btn btn-outline-dark fw-bold">
+                        ↓ Poradci
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

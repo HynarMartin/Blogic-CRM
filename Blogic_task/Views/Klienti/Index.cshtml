@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Blogic_task.Models.Klient>
+
+<h1>Seznam klientů</h1>
+
+<a asp-action="Create" class="btn btn-success ms-2">Přidat nového klienta</a>
+
+<br />
+<br />
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary ms-2">Zpět na Dashboard</a>
+
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form asp-action="Index" method="get" class="d-flex">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control me-2" placeholder="Hledat podle příjmení nebo e-mailu..." />
+            <input type="submit" value="Filtrovat" class="btn btn-primary me-2" />
+            <a asp-action="Index" class="btn btn-secondary">Zrušit filtr</a>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Jmeno</td>
+                <td>@item.Prijmeni</td>
+                <td>@item.Email</td>
+                <td>@item.Telefon</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Detail</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Upravit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Smazat</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
